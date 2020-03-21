@@ -39,6 +39,7 @@ fun Canvas.drawBiBallToArc(i : Int, scale : Float, size : Float, paint : Paint) 
     val sx : Float = size * sf1 * sj
     val startDeg : Float = 180f * i + 90f
     save()
+    drawLine(0f, 0f, 0f, sx, paint)
     save()
     rotate(deg)
     paint.style = Paint.Style.FILL
