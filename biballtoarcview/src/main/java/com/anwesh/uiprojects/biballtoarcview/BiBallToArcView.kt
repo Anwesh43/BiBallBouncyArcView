@@ -21,7 +21,7 @@ val sizeFactor : Float = 2.9f
 val foreColor : Int = Color.parseColor("#673AB7")
 val backColor : Int = Color.parseColor("#BDBDBD")
 val delay : Long = 20
-val scGap : Float = 0.02f
+val scGap : Float = 0.02f / balls
 val rFactor : Float = 6f
 
 fun Int.inverse() : Float = 1f / this
@@ -34,18 +34,18 @@ fun Canvas.drawBiBallToArc(i : Int, scale : Float, size : Float, paint : Paint) 
     val sf1 : Float = sf.divideScale(0, 2)
     val sf2 : Float = sf.divideScale(1, 2)
     val sj : Float = 1f - 2 * i
-    val deg : Float = 180f * sf2
+    val deg : Float = 90 * sf2
     val r : Float = size / rFactor
     val sx : Float = size * sf1 * sj
     val startDeg : Float = 180f * i + 90f
     save()
-    rotate(deg)
     save()
+    rotate(deg)
     paint.style = Paint.Style.FILL
     drawCircle(0f, sx, r, paint)
     restore()
     paint.style = Paint.Style.STROKE
-    drawArc(RectF(-r, -r, r, r), startDeg, deg, false, paint)
+    drawArc(RectF(-size, -size, size, size), startDeg, deg, false, paint)
     restore()
 }
 
