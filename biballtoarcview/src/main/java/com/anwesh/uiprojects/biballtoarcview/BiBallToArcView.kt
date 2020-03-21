@@ -199,4 +199,26 @@ class BiBallToArcView(ctx : Context) : View(ctx) {
             curr.startUpdating(cb)
         }
     }
+
+    data class Renderer(var view : BiBallToArcView) {
+
+        private val biBallToArc : BiBallToArc = BiBallToArc(0)
+        private val animator : Animator = Animator(view)
+
+        fun render(canvas : Canvas, paint : Paint) {
+            canvas.drawColor(backColor)
+            biBallToArc.draw(canvas, paint)
+            animator.animate {
+                biBallToArc.update {
+                    animator.stop()
+                }
+            }
+        }
+
+        fun handleTap() {
+            biBallToArc.startUpdating {
+                animator.start()
+            }
+        }
+    }
 }
